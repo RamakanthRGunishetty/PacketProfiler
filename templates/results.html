@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacketProfiler Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1C1678;
+        }
+        .result-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .result-card {
+            background-color: #8576FF;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #FFFFFF;
+        }
+        .result-card h3 {
+            margin-top: 0;
+        }
+        .result-card p {
+            margin: 5px 0;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: Black;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: purple;
+            text-decoration: underline;
+        }
+        #Note{
+            color:purple
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PacketProfiler Results</h1>
+        <div class="result-container">
+            {% for key, value in results.items() %}
+            <div class="result-card">
+                <h3>Flow:</h3>
+                <p><strong>Source Port:</strong> {{ key[1] }}</p>
+                <p><strong>Destination Port:</strong> {{ key[3] }}</p>
+                <p><strong>Protocol:</strong> {{ key[4] }}</p>
+                <h3>Classification:</h3>
+                <p>{{ value }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div id="Note">
+            <p>Note: Protocol 6 implies TCP and 17 implies UDP<p>
+        <div>
+        <a href="{{ url_for('index') }}" class="back-link">Wish To Profile More Traffic?</a>
+    </div>
+</body>
+</html>

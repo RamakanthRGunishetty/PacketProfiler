@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacketProfiler</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #A3FFD6 25%, #7BC9FF 100%);
+            color: #1C1678;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1C1678;
+            font-family: 'bubbly font';
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #8576FF;
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #7BC9FF;
+            color: #FFFFFF;
+        }
+        
+        .upload-container input[type="file"] {
+            margin-bottom: 10px;
+        }
+        .upload-container button {
+            background-color: #1C1678;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .upload-container button:hover {
+            background-color: #8576FF;
+        }
+        
+        .images-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .images-container img {
+            max-width: 400px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PacketProfiler</h1>
+        <p>Analyze Your Network Traffic By Uploading a Packet CAPture File:</p>
+
+        <div class="upload-container">
+            <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".pcap" required>
+                <button type="submit" class="upload-btn">Upload file</button>
+            </form>
+            <p>Decision Tree Model Is Choosen By Default </p>
+            <p>If You Wish To Change Models:</p>
+            <button class="upload-btn" onclick="showModelOptions()">Change Model</button>
+            <div id="model-options" style="display: none;">
+                <form action="{{ url_for('change_model') }}" method="post">
+                    <select name="model">
+                        <option value="Decision Tree">Profiler 1.0</option>
+                        <option value="KNN">Profiler 2.0</option>
+                        <option value="Random Forest">Profiler 3.0</option>
+                    </select>
+                    <button type="submit" class="upload-btn">Change Model</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="model-info" style="display: none;">
+            <h2 id="model-name"></h2>
+            <div class="images-container">
+                <img id="classification-report" src="{{ classification_report_src }}" alt="Classification Report">
+                <img id="confusion-matrix" src="{{ confusion_matrix_src }}" alt="Confusion Matrix">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showModelOptions() {
+            const modelOptions = document.getElementById('model-options');
+            modelOptions.style.display = modelOptions.style.display === 'none' ? 'block' : 'none';
+        }
+    
+        // Function to update model info on page load
+        window.onload = function() {
+            updateModelInfo("{{ model_name }}", "{{ classification_report_src }}", "{{ confusion_matrix_src }}");
+        }
+    
+        function updateModelInfo(modelName, classificationReportSrc, confusionMatrixSrc) {
+            const modelInfo = document.getElementById('model-info');
+            const modelNameElement = document.getElementById('model-name');
+            const classificationReportImg = document.getElementById('classification-report');
+            const confusionMatrixImg = document.getElementById('confusion-matrix');
+    
+            modelInfo.style.display = 'block';
+            modelNameElement.textContent = modelName;
+            classificationReportImg.src = classificationReportSrc;
+            confusionMatrixImg.src = confusionMatrixSrc;
+        }
+    </script>
+    
+</body>
+</html>
+
+
+

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacketProfiler</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bubbly&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #A3FFD6 25%, #7BC9FF 100%);
+            color: #1C1678;
+            font-family: 'Bubbly', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5em;
+            color: #1C1678;
+            margin: 10px 0;
+        }
+        .slider {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 200px;
+            margin: 20px 0;
+        }
+        .slider .slide {
+            font-size: 2em;
+            position: absolute;
+            width: 100%;
+            transition: opacity 2s;
+            padding: 20px;
+            border: 2px solid #1C1678;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        .slider .slide p {
+            font-size: 0.5em;
+            margin: 5px 0 0;
+        }
+        .images-container {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        .images-container img {
+            width: 300px;
+            height: 300px;
+            margin: 0 25px;
+            border-radius: 50%;
+            border: 2px solid #1C1678;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .button {
+            background-color: #1C1678;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #8576FF;
+        }
+    </style>
+</head>
+<body>
+    <h1>PacketProfiler</h1>
+    <div class="slider">
+        <div class="slide">
+            <div>OAM</div>
+            <p>Operations, Administration and Maintenance is traffic that involves network management tasks such as fault detection, performance monitoring, and configuration management.It ensures the network operates efficiently and helps in maintaining and troubleshooting the network infrastructure.</p>
+        </div>
+        <div class="slide">
+            <div>VoIP</div>
+            <p>Voice over Internet Protocol is a technology that allows voice communication and multimedia sessions over the Internet. It converts voice signals into digital data packets and transmits them over the network, enabling phone calls over the internet.</p>
+        </div>
+        <div class="slide">
+            <div>Bulk</div>
+            <p>Bulk data traffic consists of large volumes of data transferred over the network, often for purposes like backups, data replication, or software updates. This type of traffic can be bandwidth-intensive and may be scheduled during off-peak hours to avoid network congestion</p>
+        </div>
+        <div class="slide">
+            <div>Control</div>
+            <p>Control traffic is used for signaling and managing the flow of data within the network. It includes messages that coordinate the establishment, maintenance, and termination of data connections, ensuring proper network functionality and quality of service.</p>
+        </div>
+        <div class="slide">
+            <div>Critical</div>
+            <p>Critical traffic includes data that is essential for the operation of critical systems, such as healthcare or financial transactions. This type of traffic requires high priority and low latency to ensure timely and reliable delivery.</p>
+        </div>
+        <div class="slide">
+            <div>Default</div>
+            <p>Default traffic refers to standard or typical network traffic that does not require special handling or prioritization. It represents general-purpose data communication without specific quality of service requirements.</p>
+        </div>
+        <div class="slide">
+            <div>P2P</div>
+            <p>Peer-to-Peer traffic involves direct data exchange between devices on the network without requiring a central server. This type of traffic is commonly used for file sharing and decentralized applications, often leading to significant bandwidth usage.</p>
+        </div>
+        <div class="slide">
+            <div>Signaling</div>
+            <p>Signaling traffic is used to establish, control, and terminate connections within a network. It includes protocols and messages that manage call setups, routing, and other network control functions, essential for telecommunications and internet services.</p>
+        </div>
+        <div class="slide">
+            <div>Transaction</div>
+            <p>Transactional data involves small, discrete packets of information that represent individual transactions or exchanges of data. This type of traffic is common in financial services, e-commerce, and online applications where quick, reliable exchanges are crucial.</p>
+        </div>
+        <div class="slide">
+            <div>Video</div>
+            <p>Video streaming traffic involves the continuous transmission of video content over the network, allowing users to watch videos in real-time without downloading them. This type of traffic requires high bandwidth and low latency to ensure smooth playback and high video quality.</p>
+        </div>
+    </div>
+    <div class="images-container">
+        <img src="{{ url_for('static', filename='Icons/traffic.png') }}" alt="Eye Image">
+        <img src="{{ url_for('static', filename='Icons/lens_imgg.png') }}" alt="Lens Image">
+        <img src="{{ url_for('static', filename='Icons/wifi.jpeg') }}" alt="WiFi Image">
+    </div>
+    <div class="button-container">
+        <form action="{{ url_for('index') }}" method="post">
+            <button type="submit" class="button">Traffic Lens</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = (i === index) ? 1 : 0;
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            showSlide(currentSlide);
+            setInterval(nextSlide, 5000); // Change slide every 3 seconds
+        });
+    </script>
+</body>
+</html>
+
+
+
