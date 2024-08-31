@@ -49,7 +49,7 @@ Contributions to PacketProfiler are welcome! Please feel free to submit a Pull R
 
 ## Contact
 
-Sathwik Madhusudan - [sathwikmadhusudan@gmail.com](mailto:sathwikmadhusudan@gmail.com)
-Ramakanth R Gunishetty - [ramakanthrg2003@gmail.com](mailto:ramakanthrg2003@gmail.com)
+- Sathwik Madhusudan - [sathwikmadhusudan@gmail.com](mailto:sathwikmadhusudan@gmail.com)
+- Ramakanth R Gunishetty - [ramakanthrg2003@gmail.com](mailto:ramakanthrg2003@gmail.com)
 
 Project Link: [https://github.com/Sathwik-Madhusudan/PacketProfiler](https://github.com/Sathwik-Madhusudan/PacketProfiler)
